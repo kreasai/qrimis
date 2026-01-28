@@ -1,5 +1,5 @@
 {
-  "name": "QRIS Dynamic Generator",
-  "description": "Convert static QRIS images into dynamic QRIS with custom transaction amounts instantly.",
+  "name": "QRIMIS",
+  "description": "QRIS Dinamis Generator - Convert static QRIS images into dynamic QRIS with custom transaction amounts instantly.",
   "requestFramePermissions": []
 }

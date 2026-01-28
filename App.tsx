@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import jsQR from 'jsqr';
 import { QRCodeSVG } from 'qrcode.react';
-import { Upload, ArrowRight, RefreshCcw, Copy, Check, Trash2, History, QrCode } from 'lucide-react';
+import { Upload, ArrowRight, RefreshCcw, Trash2, History, QrCode } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -16,7 +16,6 @@ function App() {
   const [amountStr, setAmountStr] = useState<string>('0');
   const [dynamicPayload, setDynamicPayload] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const [history, setHistory] = useState<SavedQR[]>([]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -165,16 +164,6 @@ function App() {
 
   const handleBackToAmount = () => {
     setStep(AppStep.AMOUNT);
-  };
-
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(dynamicPayload);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy', err);
-    }
   };
 
   // --- Render Steps ---
@@ -338,17 +327,10 @@ function App() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 w-full mt-6">
-        <button 
-          onClick={handleCopy}
-          className="flex items-center justify-center gap-2 py-3 bg-white border border-slate-200 rounded-xl font-medium text-slate-700 hover:bg-slate-50 transition-colors"
-        >
-          {copied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
-          {copied ? "Disalin!" : "Salin Payload"}
-        </button>
+      <div className="w-full mt-6">
         <button 
           onClick={handleBackToAmount}
-          className="flex items-center justify-center gap-2 py-3 bg-rose-600 text-white rounded-xl font-medium shadow-md hover:bg-rose-700 transition-colors"
+          className="flex w-full items-center justify-center gap-2 py-3 bg-rose-600 text-white rounded-xl font-medium shadow-md hover:bg-rose-700 transition-colors"
         >
           <RefreshCcw size={18} />
           Ubah Nominal
@@ -368,14 +350,17 @@ function App() {
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans selection:bg-rose-100 selection:text-rose-900">
       <nav className="w-full bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-md mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-rose-500 to-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-gradient-to-br from-rose-500 to-orange-500 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-sm">
               Q
             </div>
-            <h1 className="font-bold text-slate-800 tracking-tight">QRIS <span className="text-rose-600">Dynamic</span></h1>
+            <div className="flex flex-col">
+              <h1 className="font-bold text-slate-900 leading-none">QRIMIS</h1>
+              <span className="text-[10px] font-semibold text-rose-600 tracking-wide uppercase">QRIS Dinamis Generator</span>
+            </div>
           </div>
           <div className="text-xs font-medium px-2 py-1 bg-slate-100 rounded text-slate-500">
-            v1.1
+            v1.2
           </div>
         </div>
       </nav>
@@ -387,7 +372,7 @@ function App() {
       </main>
       
       <footer className="py-6 text-center text-slate-400 text-sm">
-        <p>&copy; {new Date().getFullYear()} QRIS Dynamic Tool</p>
+        <p>&copy; {new Date().getFullYear()} QRIMIS - QRIS Dinamis</p>
       </footer>
     </div>
   );
