@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QRIS Dynamic Converter</title>
+    <!-- We keep Tailwind CDN for simplicity in this specific setup, 
+         though in a full production app you might import it in CSS. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -18,8 +20,10 @@
     "react": "https://esm.sh/react@^19.2.4",
     "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
     "clsx": "https://esm.sh/clsx@^2.1.1",
-    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0",
     "lucide-react": "https://esm.sh/lucide-react@^0.563.0",
+    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
+    "vite": "https://esm.sh/vite@^7.3.1",
     "qrcode.react": "https://esm.sh/qrcode.react@^4.2.0",
     "jsqr": "https://esm.sh/jsqr@^1.4.0"
   }
@@ -28,5 +32,7 @@
 </head>
   <body class="bg-slate-50 text-slate-900 antialiased">
     <div id="root"></div>
+    <!-- Vite Entry Point -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
